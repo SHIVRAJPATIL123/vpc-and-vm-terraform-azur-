@@ -16,6 +16,7 @@ steps:
     terraformVersion: '1.1.0'
 
 - task: TerraformTaskV4@4
+  displayName: "Terraform init"
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -24,7 +25,12 @@ steps:
     backendAzureRmStorageAccountName: 'tfstorageaccountshivraj'
     backendAzureRmContainerName: 'terrraformcontainer'
     backendAzureRmKey: 'tf/terraform.tfstate'
-  
+    
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
 # - task: PublishBuildArtifacts@1
 #   inputs:
 #     pathtoPublish: '$(Build.SourcesDirectory)/terraform.tfplan'
