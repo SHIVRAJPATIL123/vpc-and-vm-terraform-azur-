@@ -13,8 +13,7 @@ steps:
 - task: TerraformInstaller@0
   displayName: "Install Terraform"
   inputs:
-    terraformVersion: '1.1.0.'
-    terraformDownloadLocation: 'https://releases.hashicorp.com/terraform'
+    terraformVersion: 'latest'
 
 - script: |
     terraform init
