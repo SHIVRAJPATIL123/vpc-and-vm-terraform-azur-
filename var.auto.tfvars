@@ -1,6 +1,6 @@
-rg_name_outside = "1-d31253e9-playground-sandbox"
+rg_name_outside = "shivraj"
 
-rg_location_outside = "australiacentral"
+rg_location_outside = "East US"
 
 subnet_name = "mysubnet"
 
