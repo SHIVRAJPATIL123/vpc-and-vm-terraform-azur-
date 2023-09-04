@@ -5,7 +5,7 @@ rg_location_outside = "East US"
 subnet_name = "mysubnet"
 
 virtual_machine_name_out = "mfvm"
-virtual_machine_size     = "Standard_d2"
+virtual_machine_size     = "t2.micro"
 username                 = "shivraj"
 delegation               = ""
 add_space_outside        = ["10.0.0.0/16"]
