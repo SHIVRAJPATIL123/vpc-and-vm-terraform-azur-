@@ -31,8 +31,14 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
+    commandOptions: '-out=terraform.tfplan'
     environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.SourcesDirectory)/terraform.tfplan'
+    artifactName: 'terraformPlan'
+    publishLocation: 'Container'    
 - task: TerraformTaskV4@4
   displayName: "Terraform apply "
   inputs:
@@ -47,8 +53,3 @@ steps:
     provider: 'azurerm'
     command: 'destroy'
     environmentServiceNameAzureRM: 'Pay-As-You-Go(f510d486-a17f-44f2-a1c4-63a7186e923c)'
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     pathtoPublish: '$(Build.SourcesDirectory)/terraform.tfplan'
-#     artifactName: 'terraformPlan'
-#     publishLocation: 'Container'
