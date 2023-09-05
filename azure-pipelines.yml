@@ -19,12 +19,11 @@ pool:
   name: Default
 
 steps:
-- task: AzureCLI@2
+- task: AzurePowerShell@5
   inputs:
-    azureSubscription: 'terraform'
-    scriptType: 'ps'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
+    azureSubscription: 'Pay-As-You-Go(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    ScriptType: 'InlineScript'
+    Inline: |
       $resourceGroupName = "shivraj"
       $location = "East US"  # Modify this to your desired location
       
@@ -35,6 +34,23 @@ steps:
           Write-Host "Resource group '$resourceGroupName' not found. Creating..."
           New-AzResourceGroup -Name $resourceGroupName -Location $location
       }
+    azurePowerShellVersion: 'LatestVersion'
+# - task: AzureCLI@2
+#   inputs:
+#     azureSubscription: 'terraform'
+#     scriptType: 'ps'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: |
+#       $resourceGroupName = "shivraj"
+#       $location = "East US"  # Modify this to your desired location
+      
+      
+#       if (Get-AzResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue) {
+#           Write-Host "Resource group '$resourceGroupName' already exists. Skipping creation."
+#       } else {
+#           Write-Host "Resource group '$resourceGroupName' not found. Creating..."
+#           New-AzResourceGroup -Name $resourceGroupName -Location $location
+#       }
 - task: Bash@3
   inputs:
     targetType: 'inline'
