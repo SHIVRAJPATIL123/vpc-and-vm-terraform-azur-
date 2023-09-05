@@ -7,7 +7,7 @@ parameters:
   default: "Dev"
   values:
   - "Dev"
-  - "test"
+  - "Test"
   - "prod"
 
 trigger:
