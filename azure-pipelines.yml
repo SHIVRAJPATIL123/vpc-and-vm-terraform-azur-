@@ -69,4 +69,4 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'destroy'
-    environmentServiceNameAzureRM: 'Pay-As-You-Go(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    environmentServiceNameAzureRM: 'terraform'
