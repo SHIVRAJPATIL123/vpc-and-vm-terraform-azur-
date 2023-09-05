@@ -1,5 +1,15 @@
 name: "Terraform Plan"
 
+parameters:
+- name: Enviroment
+  displayName: Environment
+  type: string
+  default: "Dev"
+  values:
+  - "Dev"
+  - "test"
+  - "prod"
+
 trigger:
   branches:
     include:
