@@ -24,9 +24,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      # Write your commands here
       
-      echo '${{parameter.Environment}}'
+      
+      echo '${{parameters.Environment}}'
 - task: TerraformInstaller@0
   displayName: "Install Terraform"
   inputs:
