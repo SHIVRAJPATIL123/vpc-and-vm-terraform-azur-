@@ -23,7 +23,7 @@ steps:
   displayName: "ResourceGroup-creation"
   
   inputs:
-    azureSubscription: 'terraform'
+    azureSubscription: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
     ScriptType: 'InlineScript'
     Inline: |
       $resourceGroupName = "shivraj"
@@ -70,7 +70,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    backendServiceArm: 'terraform'
+    backendServiceArm: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
     backendAzureRmResourceGroupName: 'tfbackupazure'
     backendAzureRmStorageAccountName: 'tfstorageaccountshivraj'
     backendAzureRmContainerName: 'terrraformcontainer'
@@ -94,7 +94,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    environmentServiceNameAzureRM: 'Pay-As-You-Go(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
 
 - task: TerraformTaskV4@4
   condition: always()
@@ -102,4 +102,4 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'destroy'
-    environmentServiceNameAzureRM: 'terraform'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
