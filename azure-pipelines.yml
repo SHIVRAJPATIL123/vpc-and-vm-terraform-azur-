@@ -20,8 +20,10 @@ pool:
 
 steps:
 - task: AzurePowerShell@5
+  displayName: "ResourceGroup-creation"
+  
   inputs:
-    azureSubscription: 'Pay-As-You-Go(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    azureSubscription: 'terraform'
     ScriptType: 'InlineScript'
     Inline: |
       $resourceGroupName = "shivraj"
@@ -68,7 +70,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    backendServiceArm: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+    backendServiceArm: 'terraform'
     backendAzureRmResourceGroupName: 'tfbackupazure'
     backendAzureRmStorageAccountName: 'tfstorageaccountshivraj'
     backendAzureRmContainerName: 'terrraformcontainer'
