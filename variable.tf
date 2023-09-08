@@ -26,3 +26,7 @@ variable "add_space_outside" {
 variable "subnet_prefix" {
   type = list
 }
+
+variable "create_azurerm_resource_group" {
+  
+}

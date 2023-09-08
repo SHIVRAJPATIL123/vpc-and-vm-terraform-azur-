@@ -1,11 +1,11 @@
-rg_name_outside = "1-d31253e9-playground-sandbox"
+rg_name_outside = "shivraj"
 
-rg_location_outside = "australiacentral"
+rg_location_outside = "East US"
 
 subnet_name = "mysubnet"
 
 virtual_machine_name_out = "mfvm"
-virtual_machine_size     = "Standard_d2"
+virtual_machine_size     = "Standard_B1ls"
 username                 = "shivraj"
 delegation               = ""
 add_space_outside        = ["10.0.0.0/16"]
@@ -24,6 +24,6 @@ subnet_prefix            = [
 #     }
   ]
 
-
+create_azurerm_resource_group = "false"
 
 

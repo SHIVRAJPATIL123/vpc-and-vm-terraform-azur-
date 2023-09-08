@@ -1,11 +1,11 @@
 output "rg_name" {
-  value = data.azurerm_resource_group.example.name
+  value = try(azurerm_resource_group.example[0].name,"")
 }
 
 output "rg_location" {
-  value = data.azurerm_resource_group.example.location
+  value = try(azurerm_resource_group.example[0].location,"")
 }
 
 output "rg_id" {
-  value = data.azurerm_resource_group.example.id
+  value = try(azurerm_resource_group.example[0].id,"")
 }
