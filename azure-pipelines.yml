@@ -28,31 +28,17 @@ steps:
     Inline: |
       $resourceGroupName = "shivraj"
       $location = "East US"  # Modify this to your desired location
+      ls
       
-      
-      if (Get-AzResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue) {
-          Write-Host "Resource group '$resourceGroupName' already exists. Skipping creation."
-      } else {
-          Write-Host "Resource group '$resourceGroupName' not found. Creating..."
-          New-AzResourceGroup -Name $resourceGroupName -Location $location
-      }
+      # if (Get-AzResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue) {
+      #     Write-Host "Resource group '$resourceGroupName' already exists. Skipping creation."
+      # } else {
+      #     Write-Host "Resource group '$resourceGroupName' not found. Creating Via Terraform..."
+      #     ((Get-Content -path a.tfvars -Raw) -replace 'create_azurerm_resource_group = "false"','create_azurerm_resource_group = "true"') | Set-Content -Path a.tfvars
+
+      # }
     azurePowerShellVersion: 'LatestVersion'
-# - task: AzureCLI@2
-#   inputs:
-#     azureSubscription: 'terraform'
-#     scriptType: 'ps'
-#     scriptLocation: 'inlineScript'
-#     inlineScript: |
-#       $resourceGroupName = "shivraj"
-#       $location = "East US"  # Modify this to your desired location
-      
-      
-#       if (Get-AzResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue) {
-#           Write-Host "Resource group '$resourceGroupName' already exists. Skipping creation."
-#       } else {
-#           Write-Host "Resource group '$resourceGroupName' not found. Creating..."
-#           New-AzResourceGroup -Name $resourceGroupName -Location $location
-#       }
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
