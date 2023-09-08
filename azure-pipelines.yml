@@ -28,64 +28,65 @@ steps:
     Inline: |
       $resourceGroupName = "shivraj"
       $location = "East US"  # Modify this to your desired location
-      ls
       
-      # if (Get-AzResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue) {
-      #     Write-Host "Resource group '$resourceGroupName' already exists. Skipping creation."
-      # } else {
-      #     Write-Host "Resource group '$resourceGroupName' not found. Creating Via Terraform..."
-      #     ((Get-Content -path a.tfvars -Raw) -replace 'create_azurerm_resource_group = "false"','create_azurerm_resource_group = "true"') | Set-Content -Path a.tfvars
-
-      # }
+      
+      if (Get-AzResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue) {
+          Write-Host "Resource group '$resourceGroupName' already exists. Skipping creation."
+      } else {
+          Write-Host "Resource group '$resourceGroupName' not found. Creating Via Terraform..."
+          ((Get-Content -path var.auto.tfvars -Raw) -replace 'create_azurerm_resource_group = "false"','create_azurerm_resource_group = "true"') | Set-Content -Path var.auto.tfvars
+      
+      }
+      cat var.auto.tfvars
     azurePowerShellVersion: 'LatestVersion'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
       
       
-      echo '${{parameters.Environment}}'
-- task: TerraformInstaller@0
-  displayName: "Install Terraform"
-  inputs:
-    terraformVersion: '1.1.0'
+#       echo '${{parameters.Environment}}'
+# - task: TerraformInstaller@0
+#   displayName: "Install Terraform"
+#   inputs:
+#     terraformVersion: '1.1.0'
 
-- task: TerraformTaskV4@4
-  displayName: "Terraform init"
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    backendServiceArm: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
-    backendAzureRmResourceGroupName: 'tfbackupazure'
-    backendAzureRmStorageAccountName: 'tfstorageaccountshivraj'
-    backendAzureRmContainerName: 'terrraformcontainer'
-    backendAzureRmKey: 'terraform.tfstate'
+# - task: TerraformTaskV4@4
+#   displayName: "Terraform init"
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'init'
+#     backendServiceArm: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+#     backendAzureRmResourceGroupName: 'tfbackupazure'
+#     backendAzureRmStorageAccountName: 'tfstorageaccountshivraj'
+#     backendAzureRmContainerName: 'terrraformcontainer'
+#     backendAzureRmKey: 'terraform.tfstate'
     
-- task: TerraformTaskV4@4
-  displayName: "Terraform plan"
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    commandOptions: '-out=terraform.tfplan'
-    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+# - task: TerraformTaskV4@4
+#   displayName: "Terraform plan"
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'plan'
+#     commandOptions: '-out=terraform.tfplan'
+#     environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.SourcesDirectory)/terraform.tfplan'
-    artifactName: 'terraformPlan'
-    publishLocation: 'Container'    
-- task: TerraformTaskV4@4
-  displayName: "Terraform apply "
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     pathtoPublish: '$(Build.SourcesDirectory)/terraform.tfplan'
+#     artifactName: 'terraformPlan'
+#     publishLocation: 'Container'    
+# - task: TerraformTaskV4@4
+#   displayName: "Terraform apply "
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'apply'
+#     environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
 
-- task: TerraformTaskV4@4
-  condition: always()
-  displayName: "Terraform Destroy"
-  inputs:
-    provider: 'azurerm'
-    command: 'destroy'
-    environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
+# - task: TerraformTaskV4@4
+#   condition: always()
+#   displayName: "Terraform Destroy"
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'destroy'
+#     environmentServiceNameAzureRM: 'Pay-As-You-Go(1)(f510d486-a17f-44f2-a1c4-63a7186e923c)'
